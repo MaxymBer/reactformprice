@@ -12,25 +12,52 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <style>
-.selectOn{
-	width:400px;
-	float:left;
-}
-.labelText{
-width:100%;
-}
-.labelText label,.labelText input{
-width:100px;
+#container select{
+	height: 30px;
+    margin-top: -10px;
+    width: 80%;  
 }
 .stalicPrice{
-	width:200px;
+	width:300px;
+	height:500px;
 	border:1px solid gray;
-	position:fixed;
-	right:0;top:0;"
+	/* position:fixed; */
+position:absolute;
+	right:40px;
+	top:50px;
+	border-radius:20px;
+padding:10px;
+background-color:white;
+}
+.bcwhite{
+	background-color:white;
+}
+.bcgray{
+	background-color:gray;
+	height:50px;
+	padding-top:15px;
+	border-bottom:1px solid #b6b6bb;
 }
 </style>
 </head>
 <body>
+<div class="tabbable">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#tab10" data-toggle="tab">AGV</a></li>
+		<li><a href="#tab20" data-toggle="tab">AGV lab</a></li>
+	</ul>
+	<div class="tab-content" style="background-color:#f1f3f7;padding:20px;">
+		<div class="tab-pane active" id="tab10">
+			<div id="container">
+			</div>
+		</div>
+		<div class="tab-pane" id="tab20">
+			<p>AGV lab...</p>
+		</div>
+	</div>
+</div>
+
+
 <div id="container">
     <!-- This element's contents will be replaced with your component. -->
 </div>
@@ -40,7 +67,7 @@ class SomeSum extends React.Component{
 	
 	  render() {
 		  //to do - сюда таскать значение из резалт-таблицы
-			return <div className="selectOn">{this.props.priceinrow}</div>;
+			return <div>{this.props.priceinrow}</div>;
 	  }
 }
 class ProductSelect extends React.Component {
@@ -59,7 +86,7 @@ class ProductSelect extends React.Component {
  this.props.category.map(function(currOption,index){
 	 arrOfOptions.push(<option key={index}  value={currOption.valOf}  >{currOption.strInfo}</option>);
 	});	  
-    return <div className="selectOn"><select  onChange={this.props.onClick}  value={this.state.value}>{arrOfOptions}</select></div>;
+    return <div className=""><select  onChange={this.props.onClick}  value={this.state.value}>{arrOfOptions}</select></div>;
   }
 /*   
  handleClickSelect(){
@@ -94,40 +121,61 @@ class DankButton extends React.Component {
 	// render
 	render(content) { 
 		var PRODUCTS = [
-	  {indexid:10,category: 'Web-разработка', price: '449.99', stocked: true, name: 'Сайт', arrOfVlue:[{valOf:1,strInfo:'Сайт-визитка'},{valOf:2,strInfo:'Лендинговая страница'},{valOf:5,strInfo:'Портал'}]},
-	  {indexid:11,category: 'Web-разработка', price: '1.99', stocked: false, name: 'IT консалтинг', arrOfVlue:[{valOf:1,strInfo:'Умный совет'}, {valOf:10,strInfo:'Выслушать Ваши рассуждения с умным видом'}]},
-	  {indexid:12,category: 'Печатная продукция', price: '29.99', stocked: true, name: 'Печать буклета А5', arrOfVlue:[{valOf:1,strInfo:'Тираж до 100'},{valOf:0.9,strInfo:'Тираж более 1000'}]},
-	  {indexid:13,category: 'Печатная продукция', price: '99.99', stocked: true, name: 'Печать на пакете', arrOfVlue:[{valOf:'888',strInfo:'46'}]},
-	  {indexid:14,category: 'Дизайн', price: '9999.99', stocked: false, name: 'Ночь с дизайнером', arrOfVlue:[{valOf:'888',strInfo:'46'}]},
-	  {indexid:15,category: 'Дизайн', price: '77.99', stocked: true, name: 'Дизайн буклета', arrOfVlue:[{valOf:'888',strInfo:'46'}]},
-	  {indexid:16,category: 'Дизайн', price: '3.99', stocked: true, name: 'Баннер', arrOfVlue:[{valOf:'888',strInfo:'46'}]}
+	  {indexid:10,category: 'Web-разработка', showwordprefix:'от', comment:'some comment text', price: '449.99', stocked: true, name: 'Сайт', arrOfVlue:[{valOf:1,strInfo:'Сайт-визитка'},{valOf:2,strInfo:'Лендинговая страница'},{valOf:5,strInfo:'Портал'}]},
+	  {indexid:11,category: 'Web-разработка', showwordprefix:'от', comment:'some comment text', price: '1.99', stocked: false, name: 'IT консалтинг', arrOfVlue:[{valOf:1,strInfo:'Умный совет'}, {valOf:10,strInfo:'Выслушать Ваши рассуждения с умным видом'}]},
+	  {indexid:12,category: 'Печатная продукция', showwordprefix:'от', comment:'some comment text', price: '29.99', stocked: true, name: 'Печать буклета А5', arrOfVlue:[{valOf:1,strInfo:'Тираж до 100'},{valOf:0.9,strInfo:'Тираж более 1000'}]},
+	  {indexid:13,category: 'Печатная продукция', showwordprefix:'от', comment:'some comment text', price: '99.99', stocked: true, name: 'Печать на пакете', arrOfVlue:[{valOf:'888',strInfo:'46'}]},
+	  {indexid:14,category: 'Дизайн', showwordprefix:'от', comment:'some comment text', price: '9999.99', stocked: false, name: 'Ночь с дизайнером', arrOfVlue:[{valOf:'888',strInfo:'46'}]},
+	  {indexid:15,category: 'Дизайн', showwordprefix:'от', comment:'some comment text', price: '77.99', stocked: true, name: 'Дизайн буклета', arrOfVlue:[{valOf:'888',strInfo:'46'}]},
+	  {indexid:16,category: 'Дизайн', showwordprefix:'от', comment:'some comment text', price: '3.99', stocked: true, name: 'Баннер', arrOfVlue:[{valOf:'888',strInfo:'46'}]}
 		];
 		var buttonListElements = [];
 		var lastCategory = null;
 		//var i = 1;
-
+	
 			////////////////
 			// child block
 			PRODUCTS.map(function(product,index) {
 				  if (product.category !== lastCategory) {
-					buttonListElements.push(<h3>{product.category}</h3>);
+					buttonListElements.push(<div className="row bcwhite"><div className="col-md-12"><h3>{product.category}</h3></div></div>);
 				 }
-				
-				 //arrOfVlue
-							
-				  buttonListElements.push(<div key={product.indexid} className="labelText"><input type='checkbox' id={product.indexid}  onClick={this.handleClickCheckbox.bind(null, product.price,index)} value={product.price} /><label   htmlFor={product.indexid}>{product.name} - {product.price}</label>
-				<SomeSum priceinrow={product.price} key={product.price} /><ProductSelect onClick={this.removeItem.bind(this,index)} category={product.arrOfVlue} key={product.indexid} /></div>);
+				//check prefix and set if exist
+				if (product.showwordprefix != '') {	
+					var pricewithprefix = product.showwordprefix + ' ' + product.price;
+				} else {
+					pricewithprefix = product.price;
+				}
+				  buttonListElements.push(
+				  <div  key={product.indexid} className="row" title={product.comment}>
+					<div className="col-md-5 bcgray">
+						<input type='checkbox' id={product.indexid}  onClick={this.handleClickCheckbox.bind(null, product.price,index)} value={product.price} />
+						<label   htmlFor={product.indexid}>{product.name}</label>
+					</div>
+					<div className="col-md-5 bcgray"><ProductSelect onClick={this.changeItemPriceMulti.bind(this,index)} category={product.arrOfVlue} key={product.indexid} /></div>	
+					<div className="col-md-2 bcgray"><SomeSum priceinrow={pricewithprefix} key={product.price} /></div>
+
+				</div>);
 				  lastCategory = product.category;
 				 // i++;
 			}, this);		
 			// child block
 			////////////////
-		return (<div key="mainform"><span>{buttonListElements}</span><hr /><div className="stalicPrice">{this.state.allAmount}</div><hr /><button >Click me!{this.state.buttonNumber}</button></div>);
+		return (<div  className="row" key="mainform">
+					<div className="col-md-8">{buttonListElements}</div>
+					<div className="col-md-4">
+						<div className="stalicPrice">{this.state.allAmount}</div>
+						<button type="button" className="btn btn-danger">Click me!{this.state.buttonNumber}</button>
+					</div>
+				</div>);
 	}
 	// render  
 	///////////
-	
-	  removeItem(indexinarray,event){
+		/***
+		set new value for multinumber in state array (resultPrices) by indexinarray
+		arg1 indexinarray - element index
+		arg2 event - get value from event
+		*/
+	  changeItemPriceMulti(indexinarray,event){
 		  var valueForMulti = event.target.value;
 		  var newArrForFormula = this.state.resultPrices;
 		  var basePrice = newArrForFormula[indexinarray].baseprice;
@@ -138,7 +186,11 @@ class DankButton extends React.Component {
 		  
 		  this.recountIt();
 	  }
-				  
+	/***
+	set new value for 1) checked\anchecked info and 2) price (someval) value in state array with prices (resultPrices) by index (indexinarray)
+	arg1 someval - new value from user control
+	arg2 indexinarray - index of array for current price change
+	*/
 	handleClickCheckbox(someval,indexinarray) {
 		//alert(this.state.resultPrices[indexinarray].needit == false);
 		if(this.state.resultPrices[indexinarray].needit == false) {
@@ -158,13 +210,16 @@ class DankButton extends React.Component {
 		}
 			this.recountIt();
 	} 
-  
+	/***
+	set new value for state prices (resultPrices)
+	*/
 	recountIt() {
 		console.log('set it at last');
 		var forAmount = 0;
 	this.state.resultPrices.map(function(currentRow,index) {
-		if(currentRow.price != 0 && currentRow.needit == true){
-			forAmount += (parseFloat(currentRow.price) * parseFloat(currentRow.multinumber));
+		//if(currentRow.price != 0 && currentRow.needit == true){
+		if(currentRow.needit == true){
+			forAmount = (parseFloat(forAmount) + parseFloat(currentRow.baseprice)*parseFloat(currentRow.multinumber)).toFixed(2);
 		}
 	});
 		
