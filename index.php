@@ -31,7 +31,7 @@ width:600px;
 </style>
 </head>
 <body>
-	hp fuck it now
+	
 <div class="container-fluid" style="background-color:#F44336;color:#fff;height:200px;">
   <h1>AGV forever</h1>
 </div>
@@ -46,7 +46,7 @@ width:600px;
 </nav>
 
 <div  id="container" class="container-fluid" style="height:1000px">
-    <!-- This element's contents will be replaced with your component. -->
+    
 </div>
 
 
